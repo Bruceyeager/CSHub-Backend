@@ -1,0 +1,71 @@
+server:
+  address: 0.0.0.0
+  port: 8080
+  error:
+    include-message: always
+
+spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3306/cshub?createDatabaseIfNotExist=true&autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true}
+    username: ${SPRING_DATASOURCE_USERNAME:user}
+    password: ${SPRING_DATASOURCE_PASSWORD:password@1}
+    hikari:
+      connection-timeout: 30000
+      maximum-pool-size: 10
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL55Dialect
+    hibernate:
+      ddl-auto: update
+      show-sql: true
+      format-sql: true
+      type: info
+      use-sql-comments: true
+      properties:
+        hibernate.use_sql_comments: true
+        hibernate.format_sql: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${GMAIL_USERNAME:t.wangzhimin@gmail.com}
+    password: ${GMAIL_PASSWORD:basz zyap hzvt tfdr}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+springdoc:
+  show-actuator: true
+  paths-to-match: /**
+  packages-to-scan: com.smu
+
+management:
+  endpoint:
+    health:
+      show-details: ALWAYS
+    endpoints:
+      web:
+        exposure:
+          include: "*"
+
+logging:
+  level:
+    org.springframework: INFO
+    com.smu: INFO
+
+jwt:
+  secretKey: ${JWT_SECRET:secret}
+  issuer: ${JWT_ISSUER:https://github.com/DSI-SMU}
+  expirationMinute: 360
+
+swagger:
+  contact-name: Qiuyu Luo
+  contact-mail: ${SWAGGER_CONTACT_MAIL:t.qiuyluo@gmail.com}
+  contact-url: ${SWAGGER_CONTACT_URL:https://qiuyluo.com}
+  app-name: ${SWAGGER_APP_NAME:SMU CS Hub Web Application}
+  app-description: "CS Hub is a tool developed by SMU DSI"
+  app-version: ${SWAGGER_APP_VERSION:2.0.0}
+  app-license-url: ${SWAGGER_APP_LICENSE_URL:https://www.apache.org/licenses/LICENSE-2.0.html}
+  app-license: ${SWAGGER_APP_LICENSE:Apache 2.0}
+

@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+
+  db:
+    container_name: db
+    image: mysql:latest
+    restart: always
+    ports:
+      - "3306:3306" # MySQL uses port 3306
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: cshub # Replace with your desired database name
+      MYSQL_USER: user # Replace with your desired MySQL username
+      MYSQL_PASSWORD: password@1 # Replace with your desired MySQL password
+    networks:
+      - my-network
+
+networks:
+  my-network:
+    driver: bridge
